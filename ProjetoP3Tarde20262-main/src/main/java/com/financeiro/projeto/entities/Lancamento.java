@@ -61,9 +61,31 @@ public class Lancamento {
         this.pessoa = pessoa;
     }
 
-    public void atualizarInformacoes(DadosAtualizarLancamento dados) {
+    public void atualizarInformacoes(DadosAtualizarLancamento dados,
+                                     Categoria categoria, Pessoa pessoa) {
         if (dados.descricao() != null) {
             this.descricao = dados.descricao();
+        }
+        if (dados.dataVencimento() != null) {
+            this.dataVencimento = dados.dataVencimento();
+        }
+        if (dados.dataPagamento() != null) {
+            this.dataPagamento = dados.dataPagamento();
+        }
+        if (dados.valor() != null) {
+            this.valor = dados.valor();
+        }
+        if (dados.observacao() != null) {
+            this.observacao = dados.observacao();
+        }
+        if (dados.tipo() != null) {
+            this.tipo = dados.tipo();
+        }
+        if (categoria != null) {
+            this.categoria = categoria;
+        }
+        if (pessoa != null) {
+            this.pessoa = pessoa;
         }
     }
 }

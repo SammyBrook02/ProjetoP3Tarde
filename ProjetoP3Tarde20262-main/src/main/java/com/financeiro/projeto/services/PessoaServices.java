@@ -43,6 +43,7 @@ public class PessoaServices {
 
 
     }
+
     @Transactional
     public void excluirPessoa(Long id) {
         var pessoa = repository.getReferenceById(id);

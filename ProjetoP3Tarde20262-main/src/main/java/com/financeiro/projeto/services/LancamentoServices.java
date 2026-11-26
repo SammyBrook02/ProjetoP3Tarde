@@ -52,7 +52,14 @@ public class LancamentoServices {
     @Transactional
     public Lancamento atualizarLancamento(DadosAtualizarLancamento dados) {
         var lancamento = lancamentoRepository.getReferenceById(dados.id());
-        lancamento.atualizarInformacoes(dados);
+        var categoria = dados.codigoCategoria() != null
+                ? categoriaRepository.getReferenceById(dados.codigoCategoria())
+                : null;
+        var pessoa = dados.codigoPessoa() != null
+                ? pessoaRepository.getReferenceById(dados.codigoPessoa())
+                : null;
+
+        lancamento.atualizarInformacoes(dados, categoria, pessoa);
         return lancamento;
     }
 }
