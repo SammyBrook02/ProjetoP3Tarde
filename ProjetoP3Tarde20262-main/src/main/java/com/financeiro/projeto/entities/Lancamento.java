@@ -1,5 +1,6 @@
 package com.financeiro.projeto.entities;
 
+import com.financeiro.projeto.dto.DadosAtualizarLancamento;
 import com.financeiro.projeto.dto.DadosCadastroLancamento;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -58,6 +59,12 @@ public class Lancamento {
         this.tipo = dados.tipo();
         this.categoria = categoria;
         this.pessoa = pessoa;
+    }
+
+    public void atualizarInformacoes(DadosAtualizarLancamento dados) {
+        if (dados.descricao() != null) {
+            this.descricao = dados.descricao();
+        }
     }
 }
 

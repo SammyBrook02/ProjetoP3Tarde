@@ -1,12 +1,18 @@
 package com.financeiro.projeto.services;
 
+import com.financeiro.projeto.dto.DadosAtualizarLancamento;
 import com.financeiro.projeto.dto.DadosCadastroLancamento;
+import com.financeiro.projeto.dto.DadosDetalhamentoLancamento;
 import com.financeiro.projeto.entities.Lancamento;
 import com.financeiro.projeto.repositorio.CategoriaRepository;
 import com.financeiro.projeto.repositorio.LancamentoRepository;
 import com.financeiro.projeto.repositorio.PessoaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class LancamentoServices {
@@ -34,4 +40,19 @@ public class LancamentoServices {
 
     }
 
+    public Page<DadosDetalhamentoLancamento> listarLancamento(Pageable paginacao) {
+        return lancamentoRepository.findAll(paginacao)
+        .map(DadosDetalhamentoLancamento::new);
+    }
+
+    public Lancamento detalharLancamento(Long id) {
+        return lancamentoRepository.getReferenceById(id);
+    }
+
+    @Transactional
+    public Lancamento atualizarLancamento(DadosAtualizarLancamento dados) {
+        var lancamento = lancamentoRepository.getReferenceById(dados.id());
+        lancamento.atualizarInformacoes(dados);
+        return lancamento;
+    }
 }
